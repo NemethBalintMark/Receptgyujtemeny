@@ -15,18 +15,18 @@ const filterChange = () => {
 
 <template>
     <section class="mt-3">
-        <form class="d-flex" role="search">
+        <form class="d-flex keresesek" role="search">
             <input v-model="searchName" class="form-control me-2" type="search" placeholder="Keress receptet..." aria-label="Search" @keyup="filterChange" />
             
 
-            <select v-model="difficultyFilter" class="form-select me-3" aria-label="Default select example " @change="filterChange">
+            <select v-model="difficultyFilter" class="form-select me-3 filterselect" aria-label="Default select example " @change="filterChange">
                 <option value="minden">Minden nehézség</option>
                 <option value="Könnyű">könnyű</option>
                 <option value="Közepes">közepes</option>
                 <option value="Nehéz">nehéz</option>
             </select>
 
-            <select v-model="order" class="form-select" aria-label="Default select example" @change="filterChange">
+            <select v-model="order" class="form-select filterselect" aria-label="Default select example" @change="filterChange">
                 <option value="ido">Elkészítési idő szerint</option>
                 <option value="nehezseg">Nehézség szerint</option>
                 <option value="nev">Név szerint</option>
