@@ -38,7 +38,7 @@ const img = ref("");
                 </div>
 
 
-                <button type="button" class="btn btn-success" id="liveToastBtn">recept hozzáadása</button>
+                <button type="button" class="btn btn-success" id="liveToastBtn">Recept hozzáadása</button>
             </form>
         </div>
     </section>
