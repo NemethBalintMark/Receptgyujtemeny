@@ -24,7 +24,7 @@ const difficulties = {"Könnyű": "text-bg-success", "Közepes": "text-bg-warnin
 
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.getName() }}</h5>
-                        <p class="card-text">Elkészítrési idő: {{ recipe.getTime() }} perc</p>
+                        <p class="card-text">Elkészítési idő: {{ recipe.getTime() }} perc</p>
                         <p :class="'badge ' + difficulties[recipe.getDifficulty()]">{{ recipe.getDifficulty() }}</p>
                         <p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"

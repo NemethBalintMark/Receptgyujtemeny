@@ -18,11 +18,17 @@ const addRecipe = () => {
     if (inputResult.result) {
         emit("addRecipe", new Recipe(name.value, desc.value, time.value, diff.value, img.value));
 
+        errorMessage.value = "";
+
         name.value = desc.value = time.value = img.value = "";
         diff.value = "selectOne";
     } else {
         errorMessage.value = inputResult.message;
     }
+}
+
+const showToast = () => {
+
 }
 
 const checkInput = () => {
