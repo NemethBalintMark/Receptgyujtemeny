@@ -41,4 +41,14 @@ img{
     padding-right: 0;
 }
 
+.card{
+  transition: all 0.1s ease-in-out;
+}
+
+.card:hover{
+  background-color: #eeecec;
+  border: 5px solid green;
+ 
+}
+
 </style>
