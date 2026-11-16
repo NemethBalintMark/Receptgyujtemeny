@@ -1,7 +1,21 @@
 <script setup>
+import { ref } from 'vue';
 import AddRecipe from './components/AddRecipe.vue';
 import Filter from './components/Filter.vue';
 import Recipes from './components/Recipes.vue';
+import { recipesData } from './data/recipesData.js';
+import Recipe from './classes/Recipe.js';
+
+const recipes = ref([]);
+
+const init = () => {
+  for (let i = 0; i < recipesData.length; i++) {
+    const r = recipesData[i];
+    recipes.value.push(new Recipe(r.name, r.time, r.difficulty, r.img));
+  }
+}
+
+init();
 
 </script>
 
