@@ -119,8 +119,8 @@ select {
     margin-top: 100px;
     background-color: #fff;
     color:#000;
-    border: 5px solid #aaa;
-    padding: 30px;
+    border: 5px solid #008000;
+    padding: 50px;
     border-radius: 10px;
 }
 
