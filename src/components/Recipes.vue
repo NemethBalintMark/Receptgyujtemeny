@@ -32,7 +32,8 @@ const imageFromURL = (image) => {
     </section>
 
     <section class="nincs">
-        <p>Nincs találat!</p>
+        <p style="font-weight: 700;">Nincs találat!</p>
+        <img src="../img/sademoji.webp" alt="szomoruemoji" title="szomoruemoji" style="height: 300px; ">
     </section>
 
 </template>
