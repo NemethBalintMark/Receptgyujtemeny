@@ -1,4 +1,10 @@
 <script setup>
+import { ref } from 'vue';
+
+const name = ref("");
+const time = ref();
+const diff = ref("selectOne");
+const img = ref("");
 
 </script>
 
@@ -12,20 +18,21 @@
                 </div>
 
                 <div class="mb-3 mt-4">
-                    <label class="form-label">elkészítési idő:</label>
-                    <input type="text" class="form-control">
+                    <label class="form-label">Elkészítési idő:</label>
+                    <input type="number" class="form-control">
                 </div>
 
                 <div class="mb-3 mt-4">
                     <label class="form-label">Nehézség</label>
                     <select class="form-select" aria-label="Default select example">
-                        <option value="1">Könnyű</option>
-                        <option value="2">Közepes</option>
-                        <option value="3">Nehéz</option>
+                        <option value="selectOne">Válassz nehézséget!</option>
+                        <option value="Könnyű">Könnyű</option>
+                        <option value="Közepes">Közepes</option>
+                        <option value="Nehéz">Nehéz</option>
                     </select>
                 </div>
 
-                <button type="button" class="btn btn-success" id="liveToastBtn">recept hozzáadása</button>
+                <button type="button" class="btn btn-success" id="liveToastBtn">Recept hozzáadása</button>
             </form>
         </div>
     </section>
