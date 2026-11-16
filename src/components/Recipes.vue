@@ -4,21 +4,25 @@ const props = defineProps({
     recipes: Array
 })
 
+const imageFromURL = (image) => {
+    return new URL(image, import.meta.url).href;
+}
+
 </script>
 
 <template>
     <section>
         <div class="container">
             <div class="row">
-                <div class="card mt-3 me-3" style="width: 18rem;">
+                <div v-for="recipe in props.recipes" class="card mt-3 me-3" style="width: 18rem;">
                     <div class="kep">
-                        <img src="../img/Boreks_recipe.jpg" class="card-img-top w-100" alt="...">
+                        <img :src="imageFromURL(recipe.getImage())" class="card-img-top w-100" :alt="recipe.getName()" :title="recipe.getName()">
                     </div>
 
                     <div class="card-body">
-                        <h5 class="card-title">Recept név</h5>
-                        <p class="card-text">elkészítrési idő.</p>
-                        <p class="badge text-bg-success">asd</p>
+                        <h5 class="card-title">{{ recipe.getName() }}</h5>
+                        <p class="card-text">Elkészítrési idő: {{ recipe.getTime() }} perc</p>
+                        <p class="badge text-bg-success">{{ recipe.getDifficulty() }}</p>
                         <p><a href="#" class="btn btn-primary">Részletek</a></p>
                     </div>
                 </div>
