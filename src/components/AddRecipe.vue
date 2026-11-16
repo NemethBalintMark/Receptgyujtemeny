@@ -32,7 +32,13 @@ const img = ref("");
                     </select>
                 </div>
 
-                <button type="button" class="btn btn-success" id="liveToastBtn">Recept hozzáadása</button>
+                <div class="mb-3">
+                    <label class="form-label">URL:</label>
+                    <input type="url" class="form-control">
+                </div>
+
+
+                <button type="button" class="btn btn-success" id="liveToastBtn">recept hozzáadása</button>
             </form>
         </div>
     </section>
@@ -70,4 +76,15 @@ select {
 .toast-body{
     background-color: green;
 }
+
+.container{
+    margin-top: 100px;
+    background-color: #fff;
+    color:#000;
+    border: 5px solid #aaa;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+
 </style>
