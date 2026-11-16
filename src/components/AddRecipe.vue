@@ -77,14 +77,19 @@ select {
     background-color: green;
 }
 
-.container{
+.container {
     margin-top: 100px;
-    background-color: #fff;
-    color:#000;
-    border: 5px solid #008000;
-    padding: 50px;
-    border-radius: 10px;
-}
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("../img/addrecipeHatter.jpg");
 
+   
+    border: 2px solid #008000;
+    padding: 70px;
+    border-radius: 10px;
+    
+    background-repeat: repeat;
+    background-size: cover;
+}
 
 </style>
