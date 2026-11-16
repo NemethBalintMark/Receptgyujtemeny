@@ -59,6 +59,10 @@ const filterChange = (name, diff, order) => {
   orderFilter.value = order;
 };
 
+const addRecipe = (recipe) => {
+  recipes.value.push(recipe);
+}
+
 init();
 
 </script>
@@ -94,7 +98,7 @@ init();
   <main>
     <Filter v-if="page == 0" @filterChange="filterChange" />
     <Recipes v-if="page == 0" :recipes="filter" />
-    <AddRecipe v-else />
+    <AddRecipe v-else @addRecipe="addRecipe" />
   </main>
 
 
