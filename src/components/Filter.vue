@@ -4,12 +4,12 @@
 </script>
 
 <template>
-    <section>
+    <section class="mt-3">
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Keress receptet..." aria-label="Search" />
             
 
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select me-3" aria-label="Default select example ">
                 <option selected>Minden nehézség</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
