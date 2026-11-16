@@ -56,3 +56,7 @@ import Recipes from './components/Recipes.vue';
   <footer></footer>
   
 </template>
+
+<style scoped>
+
+</style>
