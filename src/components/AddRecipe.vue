@@ -13,10 +13,15 @@ const img = ref("");
 const errorMessage = ref("");
 
 const addRecipe = () => {
-    if (checkInput().result) {
-        emit("addRecipe", new Recipe(name.value, desc.value, time.value, diff.value, img.value));
-    } else {
+    let inputResult = checkInput();
 
+    if (inputResult.result) {
+        emit("addRecipe", new Recipe(name.value, desc.value, time.value, diff.value, img.value));
+
+        name.value = desc.value = time.value = img.value = "";
+        diff.value = "selectOne";
+    } else {
+        errorMessage.value = inputResult.message;
     }
 }
 
