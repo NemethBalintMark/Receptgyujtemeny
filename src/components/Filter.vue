@@ -11,16 +11,16 @@
 
             <select class="form-select me-3" aria-label="Default select example ">
                 <option selected>Minden nehézség</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">könnyű</option>
+                <option value="2">közepes</option>
+                <option value="3">nehéz</option>
             </select>
 
             <select class="form-select" aria-label="Default select example">
                 <option selected>Elkészítési idő szerint</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">Nehézség szerint</option>
+                <option value="2">Név szerint</option>
+                
             </select>
         </form>
 
