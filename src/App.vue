@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import AddRecipe from './components/AddRecipe.vue';
 import Filter from './components/Filter.vue';
 import Recipes from './components/Recipes.vue';
@@ -14,6 +14,10 @@ const init = () => {
     recipes.value.push(new Recipe(r.name, r.time, r.difficulty, r.img));
   }
 }
+
+const filter = computed(() => {
+  
+})
 
 init();
 
@@ -49,7 +53,7 @@ init();
 
   <main>
     <Filter />
-    <Recipes />
+    <Recipes :recipes="recipes" />
     <AddRecipe />
   </main>
 
