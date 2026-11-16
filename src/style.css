@@ -1,0 +1,10 @@
+body{
+  background-color: #12181f;
+}
+
+.nav-link:hover{
+  animation: ease-in-out 0.5s;
+  font-size: 120%;
+  color: green !important;
+  
+}
