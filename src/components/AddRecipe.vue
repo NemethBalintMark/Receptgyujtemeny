@@ -22,17 +22,17 @@ const addRecipe = () => {
 
 const checkInput = () => {
     if (name.value.length == 0) {
-        return {result: false, message: "A név nem lehet üres!"};
+        return { result: false, message: "A név nem lehet üres!" };
     } else if (desc.value.length == 0) {
-        return {result: false, message: "A leírás nem lehet üres!"};
+        return { result: false, message: "A leírás nem lehet üres!" };
     } else if (time.value.length == 0 || time.value == 0) {
-        return {result: false, message: "Az idő nem lehet 0 vagy üres!"};
+        return { result: false, message: "Az idő nem lehet 0 vagy üres!" };
     } else if (diff.value == "selectOne") {
-        return {result: false, message: "Válassz nehézségi szintet!"};
+        return { result: false, message: "Válassz nehézségi szintet!" };
     } else if (img.value.length == 0) {
-        return {result: false, message: "Az URL nem lehet üres!"};
+        return { result: false, message: "Az URL nem lehet üres!" };
     } else {
-        return {result: true, message: "Sikeres!"};
+        return { result: true, message: "Sikeres!" };
     }
 }
 
@@ -43,7 +43,9 @@ const checkInput = () => {
         <div class="container">
             <form class="text-center">
                 <div class="mb-3">
-                    <p v-if="errorMessage.length > 0">{{ errorMessage }}</p>
+                    <div v-if="errorMessage.length > 0" class="alert alert-danger">
+                        {{ errorMessage }}
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Név:</label>
@@ -76,13 +78,14 @@ const checkInput = () => {
                 </div>
 
 
-                <button type="button" class="btn btn-success" id="liveToastBtn" @click="addRecipe">Recept hozzáadása</button>
+                <button type="button" class="btn btn-success" id="liveToastBtn" @click="addRecipe">Recept
+                    hozzáadása</button>
             </form>
         </div>
     </section>
 
 
-    
+
 
     <div class="toast-container position-fixed top-0 end-0 p-3">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -111,7 +114,7 @@ select {
     margin: 0 auto !important;
 }
 
-.toast-body{
+.toast-body {
     background-color: green;
 }
 
@@ -121,13 +124,17 @@ select {
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url("../img/addrecipeHatter.jpg");
 
-   
+
     border: 2px solid #008000;
     padding: 70px;
     border-radius: 10px;
-    
+
     background-repeat: repeat;
     background-size: cover;
 }
 
+.alert-danger{
+    width: 50%;
+    margin: 0 auto;
+}
 </style>
