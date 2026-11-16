@@ -29,6 +29,10 @@
         
     </section>
 
+    <section class="nincs">
+        <p>Nincs találat!</p>
+    </section>
+
 </template>
 
 <style scoped>
@@ -47,8 +51,15 @@ img{
 
 .card:hover{
   background-color: #eeecec;
-  border: 5px solid green;
+  border: 5px solid #008000;
  
+}
+
+.nincs{
+    text-align: center;
+    font-size: 50px;
+    color: #ff0000;
+    margin-top: 30px;
 }
 
 </style>
