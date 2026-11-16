@@ -44,8 +44,7 @@ const difficulties = {"Könnyű": "text-bg-success", "Közepes": "text-bg-warnin
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam eaque dolorem
-                                        tempora voluptatem beatae voluptates exercitationem dolorum cum in sint!</p>
+                                    <p>{{ recipe.getDesc() }}</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
