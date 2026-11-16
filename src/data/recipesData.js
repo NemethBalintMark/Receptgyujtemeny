@@ -1,4 +1,4 @@
-export const recipes = [
+export const recipesData = [
   {
     name: "Paprikás csirke",
     time: 45,
