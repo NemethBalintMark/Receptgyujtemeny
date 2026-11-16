@@ -1,10 +1,40 @@
 <script setup>
 import { ref } from 'vue';
+import Recipe from '../classes/Recipe.js';
+
+const emit = defineEmits(["addRecipe"]);
 
 const name = ref("");
+const desc = ref("");
 const time = ref();
 const diff = ref("selectOne");
 const img = ref("");
+
+const errorMessage = ref("");
+
+const addRecipe = () => {
+    if (checkInput().result) {
+        emit("addRecipe", new Recipe(name.value, desc.value, time.value, diff.value, img.value));
+    } else {
+
+    }
+}
+
+const checkInput = () => {
+    if (name.value.length == 0) {
+        return {result: false, message: "A név nem lehet üres!"};
+    } else if (desc.value.length == 0) {
+        return {result: false, message: "A leírás nem lehet üres!"};
+    } else if (time.value.length == 0 || time.value == 0) {
+        return {result: false, message: "Az idő nem lehet 0 vagy üres!"};
+    } else if (diff.value == "selectOne") {
+        return {result: false, message: "Válassz nehézségi szintet!"};
+    } else if (img.value.length == 0) {
+        return {result: false, message: "Az URL nem lehet üres!"};
+    } else {
+        return {result: true, message: "Sikeres!"};
+    }
+}
 
 </script>
 
@@ -13,18 +43,26 @@ const img = ref("");
         <div class="container">
             <form class="text-center">
                 <div class="mb-3">
+                    <p v-if="errorMessage.length > 0">{{ errorMessage }}</p>
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Név:</label>
-                    <input type="text" class="form-control">
+                    <input v-model="name" type="text" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Leírás:</label>
+                    <input v-model="desc" type="text" class="form-control">
                 </div>
 
                 <div class="mb-3 mt-4">
                     <label class="form-label">Elkészítési idő:</label>
-                    <input type="number" class="form-control">
+                    <input v-model="time" type="number" class="form-control">
                 </div>
 
                 <div class="mb-3 mt-4">
                     <label class="form-label">Nehézség</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select v-model="diff" class="form-select" aria-label="Default select example">
                         <option value="selectOne">Válassz nehézséget!</option>
                         <option value="Könnyű">Könnyű</option>
                         <option value="Közepes">Közepes</option>
@@ -34,11 +72,11 @@ const img = ref("");
 
                 <div class="mb-3">
                     <label class="form-label">URL:</label>
-                    <input type="url" class="form-control">
+                    <input v-model="img" type="url" class="form-control">
                 </div>
 
 
-                <button type="button" class="btn btn-success" id="liveToastBtn">Recept hozzáadása</button>
+                <button type="button" class="btn btn-success" id="liveToastBtn" @click="addRecipe">Recept hozzáadása</button>
             </form>
         </div>
     </section>
