@@ -8,11 +8,13 @@ const imageFromURL = (image) => {
     return new URL(image, import.meta.url).href;
 }
 
+const difficulties = {"Könnyű": "text-bg-success", "Közepes": "text-bg-warning", "Nehéz": "text-bg-danger"}
+
 </script>
 
 <template>
-    <section>
-         <div class="container ">
+    <section v-if="props.recipes.length > 0">
+         <div class="container">
             <div class="d-flex elrendezes">
             <div v-for="recipe in props.recipes" class="card mt-3 me-3" style="width: 18rem;">
                     <div class="kep">
@@ -22,7 +24,7 @@ const imageFromURL = (image) => {
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.getName() }}</h5>
                         <p class="card-text">Elkészítrési idő: {{ recipe.getTime() }} perc</p>
-                        <p class="badge text-bg-success">{{ recipe.getDifficulty() }}</p>
+                        <p :class="'badge ' + difficulties[recipe.getDifficulty()]">{{ recipe.getDifficulty() }}</p>
                         <p><a href="#" class="btn btn-primary">Részletek</a></p>
                     </div>
                 </div>
@@ -31,7 +33,7 @@ const imageFromURL = (image) => {
 
     </section>
 
-    <section class="nincs">
+    <section class="nincs" v-else>
         <p>Nincs találat!</p>
     </section>
 

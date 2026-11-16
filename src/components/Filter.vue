@@ -1,25 +1,35 @@
 <script setup>
+import { ref } from 'vue';
 
+const emit = defineEmits(["filterChange"]);
+
+const searchName = ref("");
+const difficultyFilter = ref("minden");
+const order = ref("ido");
+
+const filterChange = () => {
+    emit("filterChange", searchName.value, difficultyFilter.value, order.value);
+}
 
 </script>
 
 <template>
     <section class="mt-3">
         <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Keress receptet..." aria-label="Search" />
+            <input v-model="searchName" class="form-control me-2" type="search" placeholder="Keress receptet..." aria-label="Search" @keyup="filterChange" />
             
 
-            <select class="form-select me-3" aria-label="Default select example ">
-                <option selected>Minden nehézség</option>
-                <option value="1">könnyű</option>
-                <option value="2">közepes</option>
-                <option value="3">nehéz</option>
+            <select v-model="difficultyFilter" class="form-select me-3" aria-label="Default select example " @change="filterChange">
+                <option value="minden">Minden nehézség</option>
+                <option value="Könnyű">könnyű</option>
+                <option value="Közepes">közepes</option>
+                <option value="Nehéz">nehéz</option>
             </select>
 
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Elkészítési idő szerint</option>
-                <option value="1">Nehézség szerint</option>
-                <option value="2">Név szerint</option>
+            <select v-model="order" class="form-select" aria-label="Default select example" @change="filterChange">
+                <option value="ido">Elkészítési idő szerint</option>
+                <option value="nehezseg">Nehézség szerint</option>
+                <option value="nev">Név szerint</option>
                 
             </select>
         </form>
