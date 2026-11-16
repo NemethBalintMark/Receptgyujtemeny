@@ -6,7 +6,7 @@
 <template>
     <section>
         <div class="container ">
-            <div class="row">
+            <div class="d-flex elrendezes">
             <div class="card mt-3 me-3" style="width: 18rem;">
                 <div class="kep">
                     <img src="../img/Boreks_recipe.jpg" class="card-img-top w-100" alt="...">
@@ -60,6 +60,10 @@ img{
     font-size: 50px;
     color: #ff0000;
     margin-top: 30px;
+}
+
+.elrendezes{
+    flex-wrap: wrap;
 }
 
 </style>
