@@ -19,7 +19,7 @@ const diffs = {"Könnyű": 1, "Közepes": 2, "Nehéz": 3};
 const init = () => {
   for (let i = 0; i < recipesData.length; i++) {
     const r = recipesData[i];
-    recipes.value.push(new Recipe(r.name, r.time, r.difficulty, r.img));
+    recipes.value.push(new Recipe(r.name, r.description, r.time, r.difficulty, r.img));
   }
 }
 
