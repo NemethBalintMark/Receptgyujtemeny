@@ -45,7 +45,7 @@ const checkInput = () => {
 
 <template>
     <section>
-        <div class="container">
+        <div class="container addRecipeContainer">
             <form class="text-center">
                 <div class="mb-3">
                     <div v-if="errorMessage.length > 0" class="alert alert-danger">
