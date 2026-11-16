@@ -23,13 +23,20 @@ const addRecipe = () => {
 
         name.value = desc.value = time.value = img.value = "";
         diff.value = "selectOne";
+
+        showToast();
     } else {
         errorMessage.value = inputResult.message;
     }
 }
 
 const showToast = () => {
-
+    const toastElement = document.querySelector(".toast");
+    const toast = new Toast(toastElement);
+    toast.show();
+    setTimeout(() => {
+        toast.hide();
+    }, 2000);
 }
 
 const checkInput = () => {
@@ -145,7 +152,7 @@ select {
     background-size: cover;
 }
 
-.alert-danger{
+.alert-danger {
     width: 50%;
     margin: 0 auto;
 }
