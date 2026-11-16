@@ -19,14 +19,9 @@ const props = defineProps({
                         <h5 class="card-title">Recept név</h5>
                         <p class="card-text">elkészítrési idő.</p>
                         <p class="badge text-bg-success">asd</p>
-                        <p><a href="#" class="btn btn-primary">Részletek
-                            </a></p>
-
+                        <p><a href="#" class="btn btn-primary">Részletek</a></p>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 
