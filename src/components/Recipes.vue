@@ -32,6 +32,10 @@ const props = defineProps({
 
     </section>
 
+    <section class="nincs">
+        <p>Nincs találat!</p>
+    </section>
+
 </template>
 
 <style scoped>
@@ -49,9 +53,17 @@ img {
     transition: all 0.1s ease-in-out;
 }
 
-.card:hover {
-    background-color: #eeecec;
-    border: 5px solid green;
-
+.card:hover{
+  background-color: #eeecec;
+  border: 5px solid #008000;
+ 
 }
+
+.nincs{
+    text-align: center;
+    font-size: 50px;
+    color: #ff0000;
+    margin-top: 30px;
+}
+
 </style>
