@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import Recipe from '../classes/Recipe.js';
+import { Toast } from 'bootstrap';
 
 const emit = defineEmits(["addRecipe"]);
 
