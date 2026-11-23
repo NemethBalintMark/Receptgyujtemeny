@@ -10,6 +10,12 @@ const imageFromURL = (image) => {
 
 const difficulties = {"Könnyű": "text-bg-success", "Közepes": "text-bg-warning", "Nehéz": "text-bg-danger"}
 
+const torles = (index) =>{
+    if(confirm("Biztosan törli?")){
+        props.recipes.splice(index, 1)
+    }
+}
+
 </script>
 
 <template>
@@ -26,11 +32,13 @@ const difficulties = {"Könnyű": "text-bg-success", "Közepes": "text-bg-warnin
                         <h5 class="card-title">{{ recipe.getName() }}</h5>
                         <p class="card-text">Elkészítési idő: {{ recipe.getTime() }} perc</p>
                         <p :class="'badge ' + difficulties[recipe.getDifficulty()]">{{ recipe.getDifficulty() }}</p>
-                        <p>
+                        <p class="d-flex justify-content-between">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 :data-bs-target="'#exampleModal' + index">
                                 Részletek
                             </button>
+
+                            <button type="button" class="btn btn-danger" @click="torles(index)">Törlés</button>
                         </p>
                     </div>
 
