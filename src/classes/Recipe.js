@@ -1,22 +1,29 @@
 export default class Recipe {
+    #id;
     #name;
     #desc;
     #time;
     #difficulty;
     #image;
 
-    constructor(name, desc, time, difficulty, image) {
+    constructor(id, name, desc, time, difficulty, image) {
+        this.setId(id);
         this.setName(name);
         this.setDesc(desc);
         this.setTime(time);
         this.setDifficulty(difficulty);
         this.setImage(image);
 
+        this.getId = this.getId.bind(this);
         this.getName = this.getName.bind(this);
         this.getDesc = this.getDesc.bind(this);
         this.getTime = this.getTime.bind(this);
         this.getDifficulty = this.getDifficulty.bind(this);
         this.getImage = this.getImage.bind(this);
+    }
+
+    setId(id) {
+        this.#id = id;
     }
 
     setName(name) {
@@ -37,6 +44,10 @@ export default class Recipe {
 
     setImage(image) {
         this.#image = image;
+    }
+
+    getId() {
+        return this.#id;
     }
 
     getName() {
@@ -61,6 +72,7 @@ export default class Recipe {
 
     toJSON() {
         return {
+            id: this.getId(),
             name: this.getName(),
             desc: this.getDesc(),
             time: this.getTime(),

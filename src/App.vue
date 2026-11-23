@@ -20,17 +20,31 @@ const init = () => {
     const savedRecipes = localStorage.getItem("reciepes");
 
     if (savedRecipes === null) {
-        recipes.value = recipesData.map(r =>
-            new Recipe(r.name, r.description, r.time, r.difficulty, r.img)
+        recipes.value = recipesData.map((r, index) =>
+            new Recipe(
+                index,
+                r.name,
+                r.description,
+                r.time,
+                r.difficulty,
+                r.img
+            )
         );
     } else {
         recipes.value = JSON.parse(savedRecipes).map(r =>
-            new Recipe(r.name, r.desc, r.time, r.difficulty, r.image)
+            new Recipe(
+                r.id,
+                r.name,
+                r.desc,
+                r.time,
+                r.difficulty,
+                r.image
+            )
         );
     }
 
     localStorage.setItem("reciepes", JSON.stringify(recipes.value));
-}
+};
 
 const filter = computed(() => {
   let filteredRecipes = [...recipes.value];
@@ -70,8 +84,30 @@ const filterChange = (name, diff, order) => {
 };
 
 const addRecipe = (recipe) => {
-  recipes.value.push(recipe);
+  const newId = recipes.value.length > 0
+    ? Math.max(...recipes.value.map(r => r.getId())) + 1
+    : 0;
+
+  recipes.value.push(new Recipe(
+    newId,
+    recipe.getName(),
+    recipe.getDesc(),
+    recipe.getTime(),
+    recipe.getDifficulty(),
+    recipe.getImage()
+  ));
+
   localStorage.setItem("reciepes", JSON.stringify(recipes.value));
+}
+
+const deleteReciepe = (id) => {
+    for (let i = 0; i < recipes.value.length; i++) {
+      if (recipes.value[i].getId() == id) {
+        recipes.value.splice(i, 1);
+      }
+    }
+
+    localStorage.setItem("reciepes", JSON.stringify(recipes.value));
 }
 
 init();
@@ -116,7 +152,7 @@ init();
 
   <main>
     <Filter v-if="page == 0" @filterChange="filterChange" />
-    <Recipes v-if="page == 0" :recipes="filter" />
+    <Recipes v-if="page == 0" :recipes="filter" @deleteReciepe="deleteReciepe" />
     <AddRecipe v-else @addRecipe="addRecipe" />
   </main>
 

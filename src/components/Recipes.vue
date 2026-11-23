@@ -4,15 +4,17 @@ const props = defineProps({
     recipes: Array
 })
 
+const emit = defineEmits(["deleteReciepe"]);
+
 const imageFromURL = (image) => {
     return new URL(image, import.meta.url).href;
 }
 
 const difficulties = {"Könnyű": "text-bg-success", "Közepes": "text-bg-warning", "Nehéz": "text-bg-danger"}
 
-const torles = (index) =>{
-    if(confirm("Biztosan törli?")){
-        props.recipes.splice(index, 1)
+const deleteReciepe = (id) =>{
+    if(confirm("Biztosan törli?")) {
+        emit("deleteReciepe", id);
     }
 }
 
@@ -38,7 +40,7 @@ const torles = (index) =>{
                                 Részletek
                             </button>
 
-                            <button type="button" class="btn btn-danger" @click="torles(index)">Törlés</button>
+                            <button type="button" class="del-btn" @click="deleteReciepe(recipe.getId())"><i class="bi bi-trash-fill"></i></button>
                         </p>
                     </div>
 
@@ -104,5 +106,11 @@ img {
 
 .elrendezes {
     flex-wrap: wrap;
+}
+
+.del-btn {
+    border: none;
+    font-size: 25px;
+    color: #ff0000;
 }
 </style>
