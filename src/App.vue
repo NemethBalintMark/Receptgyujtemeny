@@ -16,34 +16,42 @@ const orderFilter = ref("ido");
 
 const diffs = { "Könnyű": 1, "Közepes": 2, "Nehéz": 3 };
 
+const reciepeToEdit = ref();
+
+const editName = ref("");
+const editDesc = ref("");
+const editTime = ref();
+const editDifficulty = ref("");
+const editImage = ref("");
+
 const init = () => {
-    const savedRecipes = localStorage.getItem("reciepes");
+  const savedRecipes = localStorage.getItem("reciepes");
 
-    if (savedRecipes === null) {
-        recipes.value = recipesData.map((r, index) =>
-            new Recipe(
-                index,
-                r.name,
-                r.description,
-                r.time,
-                r.difficulty,
-                r.img
-            )
-        );
-    } else {
-        recipes.value = JSON.parse(savedRecipes).map(r =>
-            new Recipe(
-                r.id,
-                r.name,
-                r.desc,
-                r.time,
-                r.difficulty,
-                r.image
-            )
-        );
-    }
+  if (savedRecipes === null) {
+    recipes.value = recipesData.map((r, index) =>
+      new Recipe(
+        index,
+        r.name,
+        r.description,
+        r.time,
+        r.difficulty,
+        r.img
+      )
+    );
+  } else {
+    recipes.value = JSON.parse(savedRecipes).map(r =>
+      new Recipe(
+        r.id,
+        r.name,
+        r.desc,
+        r.time,
+        r.difficulty,
+        r.image
+      )
+    );
+  }
 
-    localStorage.setItem("reciepes", JSON.stringify(recipes.value));
+  localStorage.setItem("reciepes", JSON.stringify(recipes.value));
 };
 
 const filter = computed(() => {
@@ -101,13 +109,40 @@ const addRecipe = (recipe) => {
 }
 
 const deleteReciepe = (id) => {
-    for (let i = 0; i < recipes.value.length; i++) {
-      if (recipes.value[i].getId() == id) {
-        recipes.value.splice(i, 1);
-      }
+  for (let i = 0; i < recipes.value.length; i++) {
+    if (recipes.value[i].getId() == id) {
+      recipes.value.splice(i, 1);
     }
+  }
 
-    localStorage.setItem("reciepes", JSON.stringify(recipes.value));
+  localStorage.setItem("reciepes", JSON.stringify(recipes.value));
+}
+
+const edit = (id) => {
+  reciepeToEdit.value = recipes.value.find(
+    recipe => recipe.getId() === Number(id)
+  );
+
+  editName.value = reciepeToEdit.value.getName();
+  editDesc.value = reciepeToEdit.value.getDesc();
+  editTime.value = reciepeToEdit.value.getTime();
+  editDifficulty.value = reciepeToEdit.value.getDifficulty();
+  editImage.value = reciepeToEdit.value.getImage();
+}
+
+const saveEdit = (id) => {
+  for (let i = 0; i < recipes.value.length; i++) {
+    if (recipes.value[i].getId() == id) {
+      recipes.value[i].setName(editName.value);
+      recipes.value[i].setDesc(editDesc.value);
+      recipes.value[i].setTime(editTime.value);
+      recipes.value[i].setDifficulty(editDifficulty.value);
+      recipes.value[i].setImage(editImage.value);
+    }
+  }
+
+  recipes.value = [...recipes.value];
+  localStorage.setItem("reciepes", JSON.stringify(recipes.value));
 }
 
 init();
@@ -148,29 +183,29 @@ init();
       </div>
 
       <div class="hatter">
-          <h1 class="text-center">Receptgyűjtemény</h1>
-          <div class="recipe-slider">
-        <div v-for="(recipe, index) in recipesData.slice(0, 3)" :key="index" class="slider-card"
-          :class="'card-' + index" :style="{ backgroundImage: `url(${recipe.img})` }">
-          <span class="featured">Kiemelt recept</span>
+        <h1 class="text-center">Receptgyűjtemény</h1>
+        <div class="recipe-slider">
+          <div v-for="(recipe, index) in recipesData.slice(0, 3)" :key="index" class="slider-card"
+            :class="'card-' + index" :style="{ backgroundImage: `url(${recipe.img})` }">
+            <span class="featured">Kiemelt recept</span>
 
-          <div class="card-content">
-            <h5>{{ recipe.name }}</h5>
+            <div class="card-content">
+              <h5>{{ recipe.name }}</h5>
+            </div>
           </div>
         </div>
-      </div>
 
       </div>
 
-      
-      
+
+
     </div>
   </header>
 
 
   <main>
     <Filter v-if="page == 0" @filterChange="filterChange" />
-    <Recipes v-if="page == 0" :recipes="filter" @deleteReciepe="deleteReciepe" />
+    <Recipes v-if="page == 0" :recipes="filter" @deleteReciepe="deleteReciepe" @edit="edit" />
     <AddRecipe v-else @addRecipe="addRecipe" />
   </main>
 
@@ -179,12 +214,69 @@ init();
     <p>Minden jog fenntartva!</p>
   </footer>
 
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" v-if="reciepeToEdit">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="editModalLabel">
+            {{ reciepeToEdit.getName() }} szerkesztése
+          </h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <form class="text-center">
+            <div class="mb-3">
+              <label class="form-label">Név:</label>
+              <input v-model="editName" type="text" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Leírás:</label>
+              <input v-model="editDesc" type="text" class="form-control">
+            </div>
+
+            <div class="mb-3 mt-4">
+              <label class="form-label">Elkészítési idő:</label>
+              <input v-model="editTime" type="number" class="form-control">
+            </div>
+
+            <div class="mb-3 mt-4">
+              <label class="form-label">Nehézség</label>
+              <select v-model="editDifficulty" class="form-select" aria-label="Default select example">
+                <option value="selectOne">Válassz nehézséget!</option>
+                <option value="Könnyű">Könnyű</option>
+                <option value="Közepes">Közepes</option>
+                <option value="Nehéz">Nehéz</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">URL:</label>
+              <input v-model="editImage" type="url" class="form-control">
+            </div>
+
+
+            <button type="button" class="btn btn-success" id="liveToastBtn" data-bs-dismiss="modal" @click="saveEdit(reciepeToEdit.getId())">Mentés</button>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Bezárás
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <style scoped>
-.menu, nav {
+.menu,
+nav {
   background-color: #584B42 !important;
-  color:#fff !important;
+  color: #fff !important;
 }
 
 .hatter {
@@ -199,10 +291,10 @@ init();
   height: 400px;
   padding-top: 200px;
   margin-bottom: 100px;
- 
+
 }
 
-h1{
+h1 {
   padding-bottom: 100px !important;
 }
 
@@ -238,10 +330,8 @@ h1{
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    transparent,
-    rgba(0, 0, 0, 0.65)
-  );
+  background: linear-gradient(transparent,
+      rgba(0, 0, 0, 0.65));
 }
 
 .card-0 {
@@ -290,10 +380,8 @@ h1{
 
 
 @media (max-width: 768px) {
-  .slider-card{
+  .slider-card {
     display: none;
   }
 }
-
-
 </style>

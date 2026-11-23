@@ -4,27 +4,32 @@ const props = defineProps({
     recipes: Array
 })
 
-const emit = defineEmits(["deleteReciepe"]);
+const emit = defineEmits(["deleteReciepe", "edit"]);
 
 const imageFromURL = (image) => {
     return new URL(image, import.meta.url).href;
 }
 
-const difficulties = {"Könnyű": "text-bg-success", "Közepes": "text-bg-warning", "Nehéz": "text-bg-danger"}
+const difficulties = { "Könnyű": "text-bg-success", "Közepes": "text-bg-warning", "Nehéz": "text-bg-danger" }
 
-const deleteReciepe = (id) =>{
-    if(confirm("Biztosan törli?")) {
+const deleteReciepe = (id) => {
+    if (confirm("Biztosan törli?")) {
         emit("deleteReciepe", id);
     }
+}
+
+const edit = (id) => {
+    emit("edit", id);
 }
 
 </script>
 
 <template>
     <section v-if="props.recipes.length > 0">
-         <div class="container">
+        <div class="container">
             <div class="d-flex elrendezes">
-                <div v-for="(recipe, index) in props.recipes" :key="index" class="card mt-3 me-3 " style="width: 18rem;">
+                <div v-for="(recipe, index) in props.recipes" :key="index" class="card mt-3 me-3 "
+                    style="width: 18rem;">
                     <div class="kep">
                         <img :src="imageFromURL(recipe.getImage())" class="card-img-top w-100" :alt="recipe.getName()"
                             :title="recipe.getName()">
@@ -40,7 +45,10 @@ const deleteReciepe = (id) =>{
                                 Részletek
                             </button>
 
-                            <button type="button" class="del-btn" @click="deleteReciepe(recipe.getId())"><i class="bi bi-trash-fill"></i></button>
+                            <button type="button" class="edit-btn" data-bs-toggle="modal"
+                                data-bs-target="#editModal" @click="edit(recipe.getId())"><i class="bi bi-pencil-fill"></i></button>
+                            <button type="button" class="del-btn" @click="deleteReciepe(recipe.getId())"><i
+                                    class="bi bi-trash-fill"></i></button>
                         </p>
                     </div>
 
@@ -109,8 +117,12 @@ img {
 }
 
 .del-btn {
+    color: #ff0000;
+}
+
+.del-btn,
+.edit-btn {
     border: none;
     font-size: 25px;
-    color: #ff0000;
 }
 </style>

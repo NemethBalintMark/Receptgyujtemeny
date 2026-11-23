@@ -20,6 +20,12 @@ export default class Recipe {
         this.getTime = this.getTime.bind(this);
         this.getDifficulty = this.getDifficulty.bind(this);
         this.getImage = this.getImage.bind(this);
+
+        this.setName = this.setName.bind(this);
+        this.setDesc = this.setDesc.bind(this);
+        this.setTime = this.setTime.bind(this);
+        this.setDifficulty = this.setDifficulty.bind(this);
+        this.setImage = this.setImage.bind(this);
     }
 
     setId(id) {
