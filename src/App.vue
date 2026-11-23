@@ -14,17 +14,27 @@ const nameFilter = ref("");
 const diffFilter = ref("minden");
 const orderFilter = ref("ido");
 
-const diffs = {"Könnyű": 1, "Közepes": 2, "Nehéz": 3};
+const diffs = { "Könnyű": 1, "Közepes": 2, "Nehéz": 3 };
 
 const init = () => {
-  for (let i = 0; i < recipesData.length; i++) {
-    const r = recipesData[i];
-    recipes.value.push(new Recipe(r.name, r.description, r.time, r.difficulty, r.img));
-  }
+    const savedRecipes = localStorage.getItem("reciepes");
+
+    if (savedRecipes === null) {
+        recipes.value = recipesData.map(r =>
+            new Recipe(r.name, r.description, r.time, r.difficulty, r.img)
+        );
+    } else {
+        recipes.value = JSON.parse(savedRecipes).map(r =>
+            new Recipe(r.name, r.desc, r.time, r.difficulty, r.image)
+        );
+    }
+
+    localStorage.setItem("reciepes", JSON.stringify(recipes.value));
 }
 
 const filter = computed(() => {
   let filteredRecipes = [...recipes.value];
+  console.log(filteredRecipes);
 
   if (nameFilter.value.trim().length > 0) {
     filteredRecipes = filteredRecipes.filter((recipe) =>
@@ -61,6 +71,7 @@ const filterChange = (name, diff, order) => {
 
 const addRecipe = (recipe) => {
   recipes.value.push(recipe);
+  localStorage.setItem("reciepes", JSON.stringify(recipes.value));
 }
 
 init();
@@ -70,28 +81,29 @@ init();
 <template>
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Receptkönyv</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-       
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" @click="page = 0">Receptek</a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" @click="page = 1">Új Recept</a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page">Kedvencek</a>
-        </li>
-      </ul>
-      
-    </div>
-  </div>
-</nav>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Receptkönyv</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" @click="page = 0">Receptek</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" @click="page = 1">Új Recept</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page">Kedvencek</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
   </header>
 
 
@@ -103,9 +115,7 @@ init();
 
 
   <footer></footer>
-  
+
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
