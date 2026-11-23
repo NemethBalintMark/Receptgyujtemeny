@@ -58,4 +58,14 @@ export default class Recipe {
     getImage() {
         return this.#image;
     }
+
+    toJSON() {
+        return {
+            name: this.getName(),
+            desc: this.getDesc(),
+            time: this.getTime(),
+            difficulty: this.getDifficulty(),
+            image: this.getImage()
+        };
+    }
 }
