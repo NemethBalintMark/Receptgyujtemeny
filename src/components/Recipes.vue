@@ -24,7 +24,7 @@ const deleteReciepe = (id) =>{
     <section v-if="props.recipes.length > 0">
          <div class="container">
             <div class="d-flex elrendezes">
-                <div v-for="(recipe, index) in props.recipes" :key="index" class="card mt-3 me-3" style="width: 18rem;">
+                <div v-for="(recipe, index) in props.recipes" :key="index" class="card mt-3 me-3 " style="width: 18rem;">
                     <div class="kep">
                         <img :src="imageFromURL(recipe.getImage())" class="card-img-top w-100" :alt="recipe.getName()"
                             :title="recipe.getName()">

@@ -15,8 +15,8 @@ const filterChange = () => {
 
 <template>
     <section class="mt-3">
-        <form class="d-flex keresesek" role="search">
-            <input v-model="searchName" class="form-control me-2" type="search" placeholder="Keress receptet..." aria-label="Search" @keyup="filterChange" />
+        <form class="d-flex keresesek container" role="search">
+            <input v-model="searchName" class="form-control kereses me-2" type="search" placeholder="Keress receptet..." aria-label="Search" @keyup="filterChange" />
             
 
             <select v-model="difficultyFilter" class="form-select me-3 filterselect" aria-label="Default select example " @change="filterChange">
@@ -44,6 +44,21 @@ form {
 }
 
 select{
-    width: 40%;
+    width: 30%;
 }
+
+.keresesek{
+    margin: 0 auto;
+}
+
+.kereses{
+    width: 31%;
+}
+
+@media (max-width: 768px) {
+    .kereses{
+        width: 100%;
+    }
+}
+
 </style>
