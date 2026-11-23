@@ -94,10 +94,10 @@ init();
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                  <a class="nav-link active text-white" aria-current="page" @click="page = 0">Receptek</a>
+                  <a class="nav-link active text-white me-3" aria-current="page" @click="page = 0">Receptek</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active text-white" aria-current="page" @click="page = 1">Új Recept</a>
+                  <a class="nav-link active text-white me-3" aria-current="page" @click="page = 1">Új Recept</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active text-white" aria-current="page">Kedvencek</a>
@@ -110,6 +110,24 @@ init();
 
 
       </div>
+
+      <div class="hatter">
+          <h1 class="text-center">Receptgyűjtemény</h1>
+          <div class="recipe-slider">
+        <div v-for="(recipe, index) in recipesData.slice(0, 3)" :key="index" class="slider-card"
+          :class="'card-' + index" :style="{ backgroundImage: `url(${recipe.img})` }">
+          <span class="featured">Kiemelt recept</span>
+
+          <div class="card-content">
+            <h5>{{ recipe.name }}</h5>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      
+      
     </div>
   </header>
 
@@ -121,7 +139,9 @@ init();
   </main>
 
 
-  <footer></footer>
+  <footer class="text-center mt-5 text-dark">
+    <p>Minden jog fenntartva!</p>
+  </footer>
 
 </template>
 
@@ -129,6 +149,114 @@ init();
 .menu, nav {
   background-color: #584B42 !important;
   color:#fff !important;
+}
+
+.hatter {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(34, 78, 14, 0.25)),
+    url("./img/hatter.webp");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  height: 400px;
+  padding-top: 200px;
+  margin-bottom: 100px;
+ 
+}
+
+h1{
+  padding-bottom: 100px !important;
+}
+
+
+.recipe-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  z-index: 5;
+  margin-top: -55px;
+  padding-bottom: 30px;
+}
+
+.slider-card {
+  width: 260px;
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.slider-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.65)
+  );
+}
+
+.card-0 {
+  border-radius: 3px;
+  transform: translateY(-5px);
+}
+
+.card-1 {
+  height: 175px;
+  z-index: 2;
+  border-radius: 3px;
+}
+
+.card-2 {
+  border-radius: 3px;
+  transform: translateY(-5px);
+}
+
+.featured {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #36b879;
+  color: white;
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  padding: 12px;
+  width: 100%;
+}
+
+.card-content h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 1px 1px 3px black;
+}
+
+
+@media (max-width: 768px) {
+  .slider-card{
+    display: none;
+  }
 }
 
 
